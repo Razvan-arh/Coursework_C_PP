@@ -1,26 +1,110 @@
 //definition of draw functions both foreground and background
 
+#include "robot.h"
 #include "drawings.h"
+#include "robot_main.h"
 
 //background
-void drawGrid()
+void DrawGrid(int n) //n represents the number of cells
 {
+    setColour(black);
 
+    for (int i = 0; i < n; i++)
+        for(int j = 0; j < n; j++)
+            drawRect(UPP_CORNER_X + i * cellSize, UPP_CORNER_Y + j * cellSize, cellSize, cellSize);
+
+    setColour(red);
+    drawRect(UPP_CORNER_X, UPP_CORNER_Y, n * cellSize, n * cellSize);
 }
 
-void drawObstacle()
+void DrawObstacle(int x, int y) //coordinates of the cell
 {
+    setColour(black);
 
+    //calculate where to draw obstacle based on the cell position
+    //chose the magic numbers based on what looked the pretiest they don't appear anywhere else
+
+    int cornerX = UPP_CORNER_X + x * cellSize + 2;
+    int cornerY = UPP_CORNER_Y + y * cellSize + 2;
+    int length = cellSize - 4;
+
+    fillRect(cornerX, cornerY, length, length); 
+    
 }
 
+void DrawMarker(int x, int y)
+{
+    setColour(gray);
+
+    //same logic as DrawObstacle
+    int cornerX = UPP_CORNER_X + x * cellSize + 3;
+    int cornerY = UPP_CORNER_Y + y * cellSize + 3;
+    int length = cellSize - 6;
+
+    fillArc(cornerX, cornerY, length, length,0,360);
+}
 
 //foreground
-void drawMarker()
+void DrawRobot(int x, int y, orientation dirFacing)
+{
+    setColour(blue);
+
+    int triX[3], triY[3];
+
+    switch(dirFacing)
+    {
+        case 0:
+            triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 2;
+            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 4;
+            break;
+        case 1:
+            triX[0] = UPP_CORNER_X + x * cellSize + cellSize - cellSize / 4;
+            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 2;
+            break;
+        case 2:
+            triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 4;
+            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 2;
+            break;
+        case 3:
+            triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 2;
+            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize - cellSize / 4;
+            break;
+        default:
+            break;
+    }
+
+    triX[1] = 0; //TODO find formula for the other points
+    triY[1] = 0;
+    triX[2] = 0;
+    triY[2] = 0; 
+
+    fillPolygon(3, triX, triY);
+
+    setColour(red);
+    //drawLine();
+}
+
+//drawing logic
+void InitializeWindow()
+{
+    setWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+}
+
+void InitializeBackground()
+{
+    if(!isBackgroundDrawn) //initialize background
+    {
+
+        isBackgroundDrawn = 1;
+    }
+    else //update markers
+    {
+
+    }
+}
+
+void DrawForeground()
 {
 
 }
 
-void drawTriangle()
-{
-
-}
