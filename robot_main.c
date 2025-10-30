@@ -1,7 +1,28 @@
-
+//
 
 #include "drawings.h"
 #include "robot.h"
 #include "robot_main.h"
 
-int main(){}
+void readGrid()
+{
+
+}
+
+int readGridLength()
+{
+
+}
+
+void readAll()
+{
+    input = fopen("input.txt", "r");
+
+
+}
+
+int main()
+{
+    
+
+}

@@ -3,6 +3,9 @@
 #include "robot.h"
 #include "drawings.h"
 #include "robot_main.h"
+#include "math.h"
+
+#define PI 3.14159265358979323846
 
 //background
 void DrawGrid(int n) //n represents the number of cells
@@ -50,38 +53,43 @@ void DrawRobot(int x, int y, orientation dirFacing)
     setColour(blue);
 
     int triX[3], triY[3];
+    double angle;
 
     switch(dirFacing)
     {
         case 0:
             triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 2;
             triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 4;
+            angle = 0;
             break;
         case 1:
             triX[0] = UPP_CORNER_X + x * cellSize + cellSize - cellSize / 4;
             triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 2;
+            angle = PI / 2;
             break;
         case 2:
             triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 4;
             triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 2;
+            angle = PI;
             break;
         case 3:
             triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 2;
             triY[0] = UPP_CORNER_Y + y * cellSize + cellSize - cellSize / 4;
+            angle = PI * 3 / 2;
             break;
         default:
             break;
     }
 
-    triX[1] = 0; //TODO find formula for the other points
-    triY[1] = 0;
-    triX[2] = 0;
-    triY[2] = 0; 
+    triX[1] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) + (int)(sin(angle)) * 5; //sin + cos0
+    triY[1] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) + (int)(cos(angle)) * 5; //sin0 cos -
+    triX[2] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) - (int)(sin(angle)) * 5; //sin - cos0
+    triY[2] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) - (int)(cos(angle)) * 5; //sin 0 cos +
 
     fillPolygon(3, triX, triY);
 
     setColour(red);
-    //drawLine();
+    drawLine(triX[1] + (int)(sin(angle)) * 2, triY[1] + (int)(cos(angle)) * 2, triX[2] - (int)(sin(angle)) * 2, triY[2] - (int)(cos(angle)) * 2);
 }
 
 //drawing logic
@@ -90,21 +98,29 @@ void InitializeWindow()
     setWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
-void InitializeBackground()
+void DrawBackground(int numberOfCells)
 {
-    if(!isBackgroundDrawn) //initialize background
-    {
+    background();
+    isDrawingBackground = 1;
+    isDrawingForeground = 0;
 
-        isBackgroundDrawn = 1;
-    }
-    else //update markers
-    {
+    clear();
 
-    }
+    DrawGrid(numberOfCells);
+
 }
 
-void DrawForeground()
+void DrawForeground(int robotX, int robotY, orientation robotDirection)
 {
+    if(!isDrawingForeground)
+    {    
+        foreground();
+        isDrawingForeground = 1;
+        isDrawingBackground = 0;
+    }
 
+    clear();
+
+    DrawRobot(robotX, robotY, robotDirection);
 }
 

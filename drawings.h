@@ -8,7 +8,8 @@
 
 const int cellSize = 20;
 
-int isBackgroundDrawn = 0;
+int isDrawingBackground = 0;
+int isDrawingForeground = 0;
 
 //declaration of background drawing functions
 void DrawGrid(int);
@@ -19,6 +20,6 @@ void DrawMarker(int, int);
 void DrawRobot(int, int, orientation);
 
 //drawing logic
-void InitializeBackground();
+void DrawBackground(int);
 void DrawForeground();
-void InitializeWindow();
+void InitializeWindow(void);
