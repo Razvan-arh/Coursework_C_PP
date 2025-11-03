@@ -69,26 +69,26 @@ void DrawRobot(int x, int y, orientation dirFacing)
         case 1:
             triX[0] = UPP_CORNER_X + x * cellSize + cellSize - cellSize / 4;
             triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 2;
-            angle = PI / 2;
+            angle = PI * 3 / 2;
             break;
         case 2:
-            triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 4;
-            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize / 2;
+            triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 2;
+            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize - cellSize / 4;
             angle = PI;
             break;
         case 3:
-            triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 2;
-            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize - cellSize / 4;
-            angle = PI * 3 / 2;
+            triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 4;
+            triY[0] = UPP_CORNER_Y + y * cellSize + cellSize - cellSize / 2;
+            angle = PI / 2;
             break;
         default:
             break;
     }
 
-    triX[1] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) + (int)(cos(angle)) * 10; //sin + cos0
-    triY[1] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) + (int)(sin(angle)) * 10; //sin0 cos -
-    triX[2] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) - (int)(cos(angle)) * 10; //sin - cos0
-    triY[2] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) - (int)(sin(angle)) * 10; //sin 0 cos +
+    triX[1] = triX[0] + (int)((sin(angle)) * (cellSize / 3 * 2) + (cos(angle)) * 10); //sin + cos0
+    triY[1] = triY[0] + (int)((cos(angle)) * (cellSize / 3 * 2) + (sin(angle)) * 10); //sin0 cos -
+    triX[2] = triX[0] + (int)((sin(angle)) * (cellSize / 3 * 2) - (cos(angle)) * 10); //sin - cos0
+    triY[2] = triY[0] + (int)((cos(angle)) * (cellSize / 3 * 2) - (sin(angle)) * 10); //sin 0 cos +
 
     fillPolygon(3, triX, triY);
 
@@ -137,7 +137,7 @@ void DrawForeground(int robotX, int robotY, orientation robotDirection)
     DrawRobot(robotX, robotY, robotDirection);
 }
 
-void DrawAll(robot *rob, int n)
+void UpdateDrawing(robot *rob, int n)
 {
     if(isDrawingBackground == 0 && isDrawingForeground == 0)
     {
@@ -152,5 +152,5 @@ void DrawAll(robot *rob, int n)
     }
     else
         DrawForeground(rob -> x, rob -> y, rob -> dir);
-    sleep(200);
+    sleep(100);
 }

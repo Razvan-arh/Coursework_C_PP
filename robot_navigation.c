@@ -9,7 +9,7 @@
 
 int grid[20][20] = {0};
 int numberOfMarkers = 0;
-
+int numberOfCells = 2;
 int dirX[] = {-1, 0, 1, 0};
 int dirY[] = {0, 1, 0, -1};
 
@@ -17,7 +17,7 @@ int dirY[] = {0, 1, 0, -1};
 
 int main()
 {
-    int numberOfCells = 2;
+    
     int updateMarkers = 0;
     robot mRobot;
     robot *rob = &mRobot;
@@ -29,11 +29,11 @@ int main()
     // logic
     
     InitializeWindow();
-    DrawAll(rob, numberOfCells);
+    UpdateDrawing(rob, numberOfCells);
 
     // loop
     SimpleNavigation(rob, numberOfCells);
-
+    
     //implement task
     
    return 0;
@@ -53,7 +53,7 @@ void GoBack(robot *rob)
 
 void SimpleNavigation(robot *rob, int n)
 {
-    DrawAll(rob, n);
+    UpdateDrawing(rob, n);
 
     rob -> knownMap[rob->x][rob->y] = 0;
     

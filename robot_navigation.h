@@ -19,6 +19,7 @@ extern int grid[20][20];//most important variable in the code
 
 extern int numberOfMarkers;
 extern int updateMarkers;
+extern int numberOfCells;
 
 void SimpleNavigation();
 void GoBack();

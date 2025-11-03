@@ -3,7 +3,7 @@
 
 #include "robot_navigation.h"
 #include "robot.h"
-
+#include "drawings.h"
 
 //
 void Forward(robot *rob)
@@ -25,22 +25,19 @@ void Forward(robot *rob)
         default:
             break;
     }
+    UpdateDrawing(rob, numberOfCells);
 }
 
 void Left(robot *rob)
 {
-    if(rob -> dir == UP)
-        rob -> dir = LEFT;
-    else
-        rob -> dir -= 1;
+    rob -> dir = (rob -> dir - 1) % 4;
+    UpdateDrawing(rob, numberOfCells);
 }
 
 void Right(robot *rob)
 {
-    if(rob -> dir == LEFT)
-        rob -> dir = UP;
-    else
-        rob -> dir += 1;
+    rob -> dir = (rob -> dir + 1) % 4;
+    UpdateDrawing(rob, numberOfCells);
 }
 
 int AtMarker(robot *rob)

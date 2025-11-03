@@ -27,6 +27,6 @@ void DrawRobot();
 void DrawBackground(int);
 void DrawForeground();
 void InitializeWindow(void);
-void DrawAll();
+void UpdateDrawing();
 
 #endif 
