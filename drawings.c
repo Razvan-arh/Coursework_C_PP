@@ -7,7 +7,7 @@
 
 #define PI 3.14159265358979323846
 
-const int cellSize = 20;
+const int cellSize = 35;
 int isDrawingBackground = 0;
 int isDrawingForeground = 0;
 
@@ -85,15 +85,15 @@ void DrawRobot(int x, int y, orientation dirFacing)
             break;
     }
 
-    triX[1] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) + (int)(sin(angle)) * 5; //sin + cos0
-    triY[1] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) + (int)(cos(angle)) * 5; //sin0 cos -
-    triX[2] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) - (int)(sin(angle)) * 5; //sin - cos0
-    triY[2] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) - (int)(cos(angle)) * 5; //sin 0 cos +
+    triX[1] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) + (int)(cos(angle)) * 10; //sin + cos0
+    triY[1] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) + (int)(sin(angle)) * 10; //sin0 cos -
+    triX[2] = triX[0] + (int)(sin(angle)) * (cellSize / 3 * 2) - (int)(cos(angle)) * 10; //sin - cos0
+    triY[2] = triY[0] + (int)(cos(angle)) * (cellSize / 3 * 2) - (int)(sin(angle)) * 10; //sin 0 cos +
 
     fillPolygon(3, triX, triY);
 
     setColour(red);
-    drawLine(triX[1] + (int)(sin(angle)) * 2, triY[1] + (int)(cos(angle)) * 2, triX[2] - (int)(sin(angle)) * 2, triY[2] - (int)(cos(angle)) * 2);
+    drawLine(triX[1] + (int)(cos(angle)) * 2, triY[1] + (int)(sin(angle)) * 2, triX[2] - (int)(cos(angle)) * 2, triY[2] - (int)(sin(angle)) * 2);
 }
 
 //drawing logic

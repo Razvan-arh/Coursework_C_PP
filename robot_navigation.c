@@ -21,17 +21,22 @@ int main()
     int updateMarkers = 0;
     robot mRobot;
     robot *rob = &mRobot;
-
-    // logic
     numberOfCells = ReadAll(rob);
+    
+    for (int i = 0; i < numberOfCells; i++)
+        for (int j = 0; j < numberOfCells; j++)
+        rob -> knownMap[i][j] = 0;
+    // logic
+    
     InitializeWindow();
-    DrawBackground(numberOfCells);
-    DrawForeground(rob -> x, rob -> y, rob -> dir);
+    DrawAll(rob, numberOfCells);
 
     // loop
     SimpleNavigation(rob, numberOfCells);
 
     //implement task
+    
+   return 0;
 }
 
 
