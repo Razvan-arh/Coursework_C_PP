@@ -2,10 +2,14 @@
 
 #include "robot.h"
 #include "drawings.h"
-#include "robot_main.h"
+#include "robot_navigation.h"
 #include "math.h"
 
 #define PI 3.14159265358979323846
+
+const int cellSize = 20;
+int isDrawingBackground = 0;
+int isDrawingForeground = 0;
 
 //background
 void DrawGrid(int n) //n represents the number of cells
@@ -108,6 +112,15 @@ void DrawBackground(int numberOfCells)
 
     DrawGrid(numberOfCells);
 
+    for(int i = 0; i < numberOfCells; i++)
+        for(int j = 0; j < numberOfCells; j++)
+        {
+            if(grid[i][j] == 1)
+                DrawObstacle(i, j);
+            if(grid[i][j] == 2)
+                DrawMarker(i, j);
+        }
+    
 }
 
 void DrawForeground(int robotX, int robotY, orientation robotDirection)
@@ -120,7 +133,24 @@ void DrawForeground(int robotX, int robotY, orientation robotDirection)
     }
 
     clear();
-
+    
     DrawRobot(robotX, robotY, robotDirection);
 }
 
+void DrawAll(robot *rob, int n)
+{
+    if(isDrawingBackground == 0 && isDrawingForeground == 0)
+    {
+        DrawBackground(n);
+        DrawForeground(rob -> x, rob -> y, rob -> dir);
+    }
+    else if(updateMarkers)
+    {
+        DrawBackground(n);
+        DrawForeground(rob -> x, rob -> y, rob -> dir);
+        updateMarkers = 0;
+    }
+    else
+        DrawForeground(rob -> x, rob -> y, rob -> dir);
+    sleep(200);
+}

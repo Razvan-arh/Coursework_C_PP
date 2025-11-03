@@ -1,4 +1,8 @@
 //declaration of all drawing functions
+
+#ifndef DRAWINGS_H
+#define DRAWINGS_H
+
 #define WINDOW_WIDTH 850
 #define WINDOW_HEIGHT 850
 #define UPP_CORNER_X 30
@@ -6,10 +10,10 @@
 
 #include "graphics.h"
 
-const int cellSize = 20;
+extern const int cellSize;
 
-int isDrawingBackground = 0;
-int isDrawingForeground = 0;
+extern int isDrawingBackground;
+extern int isDrawingForeground;
 
 //declaration of background drawing functions
 void DrawGrid(int);
@@ -17,9 +21,12 @@ void DrawObstacle(int, int);
 void DrawMarker(int, int);
 
 //declaration of foreground drawing functions
-void DrawRobot(int, int, orientation);
+void DrawRobot();
 
 //drawing logic
 void DrawBackground(int);
 void DrawForeground();
 void InitializeWindow(void);
+void DrawAll();
+
+#endif 
