@@ -7,12 +7,12 @@
 #include <string.h>
 
 
-int grid[20][20] = {0};
+int grid[MAX_GRID_LENGTH][MAX_GRID_LENGTH] = {0};
 int numberOfMarkers = 0;
 int numberOfCells = 2;
-int dirX[] = {-1, 0, 1, 0};
-int dirY[] = {0, 1, 0, -1};
-
+int dirX[] = {0, 1, 0, -1};
+int dirY[] = {-1, 0, 1, 0};
+int allMarkersCollected = 0;
 
 
 int main()
@@ -21,20 +21,26 @@ int main()
     int updateMarkers = 0;
     robot mRobot;
     robot *rob = &mRobot;
+
     numberOfCells = ReadAll(rob);
+    if(numberOfCells > MAX_GRID_LENGTH)
+        return 0;
     
     for (int i = 0; i < numberOfCells; i++)
         for (int j = 0; j < numberOfCells; j++)
         rob -> knownMap[i][j] = 0;
-    // logic
     
+    rob -> markers = 0;
+    rob -> dir = UP;
+
+    // logic
     InitializeWindow();
     UpdateDrawing(rob, numberOfCells);
 
     // loop
     SimpleNavigation(rob, numberOfCells);
     
-    //implement task
+    //TODO implement task
     
    return 0;
 }
@@ -53,23 +59,34 @@ void GoBack(robot *rob)
 
 void SimpleNavigation(robot *rob, int n)
 {
-    UpdateDrawing(rob, n);
-
-    rob -> knownMap[rob->x][rob->y] = 0;
+    rob -> knownMap[rob->x][rob->y] = 2;
     
-    if(grid[rob -> x][rob -> y] == 2)
+    if(allMarkersCollected)
+       return;
+
+    if(AtMarker(rob))
     {
-        PickUpMarker(rob);
         updateMarkers = 1;
+        PickUpMarker(rob);
+        
+        if(MarkerCount(rob) == numberOfMarkers)
+            {
+                allMarkersCollected = 1;
+                return;   
+            }
     }
-    if(MarkerCount() == numberOfMarkers)
-        return;
+
+    if(numberOfMarkers == 1)
+        drawLine(10, 10, 100, 100);
     
     for(int i = 0; i < 4; i++)
     {
+        if(allMarkersCollected)
+            break;
+
         int newDir = (rob -> dir + i) % 4;
-        int newX = rob -> x + dirX[i];
-        int newY = rob -> y + dirY[i];
+        int newX = rob -> x + dirX[newDir];
+        int newY = rob -> y + dirY[newDir];
 
         while(rob -> dir != newDir)
             Right(rob);
@@ -78,9 +95,16 @@ void SimpleNavigation(robot *rob, int n)
         {
             if(CanMoveForward(rob, n))
             {
+                if(allMarkersCollected)
+                    return;
+
                 Forward(rob);
                 SimpleNavigation(rob, n);
-                GoBack(rob);
+
+                if(allMarkersCollected)
+                    return;    
+                else
+                    GoBack(rob);
             }
             else
             {

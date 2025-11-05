@@ -6,6 +6,7 @@
 #include "math.h"
 
 #define PI 3.14159265358979323846
+#define UPDATE_SPEED 50
 
 const int cellSize = 35;
 int isDrawingBackground = 0;
@@ -152,5 +153,5 @@ void UpdateDrawing(robot *rob, int n)
     }
     else
         DrawForeground(rob -> x, rob -> y, rob -> dir);
-    sleep(100);
+    sleep(UPDATE_SPEED);
 }

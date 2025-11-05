@@ -6,12 +6,13 @@
 
 #include <stdio.h>
 
-#define SLEEP_DURATION 100
+#define MAX_GRID_LENGTH 40
+
 
 extern FILE *inputPtr;
 extern FILE *fileptr;
 
-extern int grid[20][20];//most important variable in the code
+extern int grid[MAX_GRID_LENGTH][MAX_GRID_LENGTH];//most important variable in the code
                  //free space = 0
                  //obstacle = 1
                  //marker = 2

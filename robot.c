@@ -49,16 +49,16 @@ int AtMarker(robot *rob)
 
 int CanMoveForward(robot *rob, int n)
 {
-    if ((rob -> dir == UP) && (rob -> y != 0) && (grid[rob -> x][rob -> y - 1] == 1))
-        return 0;
-    if ((rob -> dir == RIGHT) && (rob -> x != (n - 1)) && (grid[rob -> x + 1][rob -> y] == 1))
-        return 0;
-    if ((rob -> dir == DOWN) && (rob -> y != (n - 1)) && (grid[rob -> x][rob -> y + 1] == 1))
-        return 0;
-    if ((rob -> dir == LEFT) && (rob -> x != 0) && (grid[rob -> x - 1][rob -> y] == 1))
-        return 0; 
+    if ((rob -> dir == UP) && (rob -> y >= 0) && (grid[rob -> x][(rob -> y) - 1] != 1))
+        return 1;
+    if ((rob -> dir == RIGHT) && (rob -> x < n) && (grid[(rob -> x) + 1][rob -> y] != 1))
+        return 1;
+    if ((rob -> dir == DOWN) && (rob -> y < n) && (grid[rob -> x][(rob -> y) + 1] != 1))
+        return 1;
+    if ((rob -> dir == LEFT) && (rob -> x >= 0) && (grid[(rob -> x) - 1][rob -> y] != 1))
+        return 1; 
     
-    return 1;
+    return 0;
 }
 
 void PickUpMarker(robot *rob)
@@ -66,6 +66,8 @@ void PickUpMarker(robot *rob)
     grid[rob -> x][rob -> y] = 0;
 
     rob -> markers += 1;
+    
+    UpdateDrawing(rob, numberOfCells);
 }
 
 void DropMarker(robot *rob)
@@ -73,6 +75,8 @@ void DropMarker(robot *rob)
     grid[rob -> x][rob -> y] = 2;
 
     rob -> markers -= 1;
+
+    UpdateDrawing(rob, numberOfCells);
 }
 
 int MarkerCount(robot *rob)

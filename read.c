@@ -62,6 +62,9 @@ int ReadAll(robot *rob)
         fileptr = fopen("empty.txt", "r");
         
         n = ReadGridLength();
+        if(n > MAX_GRID_LENGTH)
+            return n;
+
         ReadGrid(rob);
         
         fclose(fileptr);
@@ -78,6 +81,9 @@ int ReadAll(robot *rob)
         fileptr = fopen("custom.txt", "r");
 
         n = ReadGridLength();
+        if(n > MAX_GRID_LENGTH)
+            return n;
+        
         ReadGrid(rob);
 
         fclose(fileptr);    
