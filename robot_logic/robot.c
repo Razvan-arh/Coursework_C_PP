@@ -49,16 +49,19 @@ int AtMarker(robot *rob)
 
 int CanMoveForward(robot *rob, int n)
 {
-    if ((rob -> dir == UP) && (rob -> y >= 0) && (grid[rob -> x][(rob -> y) - 1] != 1))
-        return 1;
-    if ((rob -> dir == RIGHT) && (rob -> x < n) && (grid[(rob -> x) + 1][rob -> y] != 1))
-        return 1;
-    if ((rob -> dir == DOWN) && (rob -> y < n) && (grid[rob -> x][(rob -> y) + 1] != 1))
-        return 1;
-    if ((rob -> dir == LEFT) && (rob -> x >= 0) && (grid[(rob -> x) - 1][rob -> y] != 1))
-        return 1; 
-    
-    return 0;
+    switch (rob->dir)
+    {
+        case UP:
+            return (rob -> y > 0 && grid[rob -> x][rob -> y - 1] != 1);
+        case RIGHT:
+            return (rob -> x < n - 1 && grid[rob -> x + 1][rob -> y] != 1);
+        case DOWN:
+            return (rob -> y < n - 1 && grid[rob -> x][rob -> y + 1] != 1);
+        case LEFT:
+            return (rob -> x > 0 && grid[rob -> x - 1][rob -> y] != 1);
+        default:
+            return 0;
+    }
 }
 
 void PickUpMarker(robot *rob)

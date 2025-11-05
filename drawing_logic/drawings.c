@@ -6,7 +6,6 @@
 #include "drawings.h"
 
 #define PI 3.14159265358979323846
-#define UPDATE_SPEED 50
 
 const int cellSize = 35;
 int isDrawingBackground = 0;

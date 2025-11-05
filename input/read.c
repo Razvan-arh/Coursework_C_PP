@@ -1,13 +1,15 @@
 
+#include "math.h"
+#include <stdlib.h>
 #include <stdio.h>
 #include "../robot_logic/robot.h"
 #include "../robot_logic/robot_navigation.h"
 #include <string.h>
+#include "stages.h"
 
 FILE *inputPtr;
 FILE *fileptr;
 
-int updateMarkers;
 
 void ReadGrid(robot *rob)
 {
@@ -48,6 +50,7 @@ int ReadGridLength()
 
 int ReadAll(robot *rob)
 {
+    
     rob -> dir = UP;
 
     inputPtr = fopen("input/input.txt", "r");
@@ -71,12 +74,12 @@ int ReadAll(robot *rob)
         return n;
     }
 
-    if (strcmp(codeWord, "RANDOM"))
+    if (strcmp(codeWord, "RANDOM") == 0)
     {
         //random
     }
     
-    if (strcmp(codeWord, "CUSTOM"))
+    if (strcmp(codeWord, "CUSTOM") == 0)
     {
         fileptr = fopen("input/custom.txt", "r");
 
@@ -85,10 +88,22 @@ int ReadAll(robot *rob)
             return n;
         
         ReadGrid(rob);
-
+        
         fclose(fileptr);    
         return n;
     }
+    
+    if (strcmp(codeWord, "STAGE1") == 0) 
+        n = GenerateStage1(rob);
+    if (strcmp(codeWord, "STAGE2") == 0)
+        n = GenerateStage2(rob);
+    if (strcmp(codeWord, "STAGE3") == 0)
+        n = GenerateStage3(rob);
+    if (strcmp(codeWord, "STAGE4") == 0)
+        n = GenerateStage4(rob);
+    if (strcmp(codeWord, "STAGE5") == 0)
+        n = GenerateStage5(rob);
 
     return n;
 }
+

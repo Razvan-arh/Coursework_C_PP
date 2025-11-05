@@ -7,6 +7,7 @@
 #define WINDOW_HEIGHT 850
 #define UPP_CORNER_X 30
 #define UPP_CORNER_Y 30
+#define UPDATE_SPEED 50
 
 #include "graphics.h"
 
