@@ -1,7 +1,7 @@
 
 #include <stdio.h>
-#include "robot.h"
-#include "robot_navigation.h"
+#include "../robot_logic/robot.h"
+#include "../robot_logic/robot_navigation.h"
 #include <string.h>
 
 FILE *inputPtr;
@@ -50,7 +50,7 @@ int ReadAll(robot *rob)
 {
     rob -> dir = UP;
 
-    inputPtr = fopen("input.txt", "r");
+    inputPtr = fopen("input/input.txt", "r");
     int n = 3; //cell number
     char codeWord[20];
     fgets(codeWord, 20, inputPtr);
@@ -59,7 +59,7 @@ int ReadAll(robot *rob)
     if (strcmp(codeWord, "EMPTY") == 0)
     {
         
-        fileptr = fopen("empty.txt", "r");
+        fileptr = fopen("input/empty.txt", "r");
         
         n = ReadGridLength();
         if(n > MAX_GRID_LENGTH)
@@ -78,7 +78,7 @@ int ReadAll(robot *rob)
     
     if (strcmp(codeWord, "CUSTOM"))
     {
-        fileptr = fopen("custom.txt", "r");
+        fileptr = fopen("input/custom.txt", "r");
 
         n = ReadGridLength();
         if(n > MAX_GRID_LENGTH)

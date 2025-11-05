@@ -1,9 +1,9 @@
 //definition of draw functions both foreground and background
 
-#include "robot.h"
-#include "drawings.h"
-#include "robot_navigation.h"
+#include "../robot_logic/robot.h"
+#include "../robot_logic/robot_navigation.h"
 #include "math.h"
+#include "drawings.h"
 
 #define PI 3.14159265358979323846
 #define UPDATE_SPEED 50

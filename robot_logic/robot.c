@@ -3,7 +3,7 @@
 
 #include "robot_navigation.h"
 #include "robot.h"
-#include "drawings.h"
+#include "../drawing_logic/drawings.h"
 
 //
 void Forward(robot *rob)
