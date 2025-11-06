@@ -8,20 +8,18 @@
 
 
 int grid[MAX_GRID_LENGTH][MAX_GRID_LENGTH] = {0};
-int updateMarkers;
+int updateMarkers = 0;
 int numberOfMarkers = 0;
 int numberOfCells = 2;
 int dirX[] = {0, 1, 0, -1};
 int dirY[] = {-1, 0, 1, 0};
 int objectiveCompleted = 0;
 int objective = 0;
-int objX;
-int objY;
+int objX = 0;
+int objY = 0;
 
 int main()
 {
-    
-    int updateMarkers = 0;
     robot mRobot;
     robot *rob = &mRobot;
 
@@ -48,7 +46,7 @@ int main()
     if(objective == 1)
     {
         objectiveCompleted = 0;
-        SimpleNavigation(rob, numberOfCells, 1); //TODO make it draw the droped marker
+        SimpleNavigation(rob, numberOfCells, 1); 
     }
 
     
@@ -88,6 +86,7 @@ void SimpleNavigation(robot *rob, int n, int currentObjective) {
     {
         if(rob -> x == objX && rob -> y == objY)
             {
+                updateMarkers = 1;
                 DropMarker(rob);
                 objectiveCompleted = 1;
                 return; 

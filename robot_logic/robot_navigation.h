@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 
-#define MAX_GRID_LENGTH 40
+#define MAX_GRID_LENGTH 25
 
 
 extern FILE *inputPtr;

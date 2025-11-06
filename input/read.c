@@ -48,6 +48,59 @@ int ReadGridLength()
     return n;
 }
 
+int RandomGeneration(robot *rob)
+{
+    int n;
+    int x, y;
+    int direction;
+    int maximumNumberOfObstacles;
+
+    numberOfMarkers = rand() % 5;
+    objective = 0;
+    
+
+    do //picks a random grid length between 10 and the max length
+    {
+        n = rand() % 100;
+    } while (n > MAX_GRID_LENGTH || n < 10);
+
+    maximumNumberOfObstacles = n / 3 * 5; //chose an arbitrary number based on n
+
+    //selects robot position
+    x = rand() % n;
+    y = rand() % n;
+    
+    
+    rob -> x = x;
+    rob -> y = y;
+
+    for(int i = 0; i < numberOfMarkers; i++){
+        do //selects marker position
+        {
+            x = rand() % n;
+            y = rand() % n;
+        } while (x == rob -> x && y == rob -> y);
+
+        grid[x][y] = 2; 
+    }
+
+    rob -> dir = rand() % 4; //selects random direction
+
+    //generates all obstacles
+    for(int i = rand() % maximumNumberOfObstacles; i < maximumNumberOfObstacles; i++)   
+        {   
+            do
+            {
+                x = rand() % n;
+                y = rand() % n;
+            } while((x == rob -> x && y == rob -> y) || grid[x][y] == 2);
+            grid[x][y] = 1;
+        }
+
+    return n;
+}
+
+
 int ReadAll(robot *rob)
 {
     
@@ -76,7 +129,7 @@ int ReadAll(robot *rob)
 
     if (strcmp(codeWord, "RANDOM") == 0)
     {
-        //random
+        n = RandomGeneration(rob);
     }
     
     if (strcmp(codeWord, "CUSTOM") == 0)

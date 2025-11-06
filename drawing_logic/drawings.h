@@ -3,8 +3,8 @@
 #ifndef DRAWINGS_H
 #define DRAWINGS_H
 
-#define WINDOW_WIDTH 850
-#define WINDOW_HEIGHT 850
+#define WINDOW_WIDTH 1000
+#define WINDOW_HEIGHT 1000
 #define UPP_CORNER_X 30
 #define UPP_CORNER_Y 30
 #define UPDATE_SPEED 50

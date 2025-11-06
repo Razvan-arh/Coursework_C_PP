@@ -134,7 +134,7 @@ int GenerateStage4(robot *rob)
         n = rand() % 100;
     } while (n > MAX_GRID_LENGTH || n < 10);
 
-    maximumNumberOfObstacles = n / 10 * 3; //chose an arbitrary number based on n
+    maximumNumberOfObstacles = n / 5 * 3; //chose an arbitrary number based on n
 
     //selects robot position
     x = rand() % n;
