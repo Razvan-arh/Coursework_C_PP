@@ -1,0 +1,7 @@
+gcc $(find input drawing_logic robot_logic -type f -name '*.c') -o main -lm
+gcc input/stages.c input/read.c drawing_logic/drawings.c drawing_logic/graphics.c robot_logic/robot_navigation.c robot_logic/robot.c -o main -lm
+
+make
+make clean
+
+./main | java -jar drawapp-4.5.jar
