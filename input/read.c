@@ -55,7 +55,7 @@ int RandomGeneration(robot *rob)
     int direction;
     int maximumNumberOfObstacles;
 
-    numberOfMarkers = rand() % 5;
+    numberOfMarkers = rand() % 5 + 1;
     objective = 0;
     
 

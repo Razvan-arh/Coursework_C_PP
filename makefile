@@ -3,7 +3,7 @@
 CC = gcc
 CFLAGS = -g
 
-TARGET = square
+TARGET = main
 
 # finds all .c files recursively and creates coresponding .o files
 SRCS := $(shell find . -name "*.c")
@@ -13,7 +13,7 @@ all: $(TARGET)
 
 # links objects to create the executable
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) -lm
+	$(CC) $(CFLAGS) -o $@ $(OBJS) -lm 
 
 
 %.o: %.c

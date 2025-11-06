@@ -177,7 +177,7 @@ int GenerateStage5(robot *rob)
     int x, y;
     int direction;
 
-    numberOfMarkers = rand() % 5;
+    numberOfMarkers = rand() % 5 + 1;
     objective = 0;
     
 

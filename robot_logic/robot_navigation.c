@@ -5,14 +5,15 @@
 #include "robot.h"
 #include "robot_navigation.h"
 #include <string.h>
-
+#include <stdlib.h>
+#include <time.h>
 
 int grid[MAX_GRID_LENGTH][MAX_GRID_LENGTH] = {0};
 int updateMarkers = 0;
 int numberOfMarkers = 0;
 int numberOfCells = 2;
-int dirX[] = {0, 1, 0, -1};
-int dirY[] = {-1, 0, 1, 0};
+int dirX[4] = {0, 1, 0, -1};
+int dirY[4] = {-1, 0, 1, 0};
 int objectiveCompleted = 0;
 int objective = 0;
 int objX = 0;
@@ -20,20 +21,26 @@ int objY = 0;
 
 int main()
 {
+    srand(time(NULL));
+
     robot mRobot;
     robot *rob = &mRobot;
 
     rob -> markers = 0;
     rob -> dir = UP;
-    
+   
     numberOfCells = ReadAll(rob);
      
     if(numberOfCells > MAX_GRID_LENGTH)
         return 0;
     
-    for (int i = 0; i < numberOfCells; i++)
-        for (int j = 0; j < numberOfCells; j++)
-        rob -> knownMap[i][j] = 0;
+    rob->knownMap = malloc(MAX_GRID_LENGTH * sizeof(int *));
+        for (int i = 0; i < MAX_GRID_LENGTH; i++)
+            rob->knownMap[i] = malloc(MAX_GRID_LENGTH * sizeof(int));
+
+    for (int i = 0; i < MAX_GRID_LENGTH; i++)
+        for (int j = 0; j < MAX_GRID_LENGTH; j++)
+            rob -> knownMap[i][j] = 0;
     
     
     // logic
@@ -57,14 +64,13 @@ int main()
 //
 void TurnTo(robot *rob, int new_dir) {
     int turn = (new_dir - rob -> dir + 4) % 4;
+    if(turn == 0) return;
     if(turn == 1) Right(rob);
     else if(turn == 2) { Right(rob); Right(rob); }
     else if(turn == 3) Left(rob);
 }
 
-
 void SimpleNavigation(robot *rob, int n, int currentObjective) {
-    rob -> knownMap[rob -> x][rob -> y] = 2;
     
     if(objectiveCompleted)
        return;
@@ -110,6 +116,7 @@ void SimpleNavigation(robot *rob, int n, int currentObjective) {
                 if(objectiveCompleted)
                     return;
                 Forward(rob);
+                rob -> knownMap[nx][ny] = 2;
                 SimpleNavigation(rob, n, currentObjective);
                 if(objectiveCompleted)
                     return;

@@ -5,13 +5,14 @@
 
 typedef enum _orientation {UP = 0, RIGHT, DOWN, LEFT}orientation;
 
+#include "robot_navigation.h"
 
 typedef struct _Robot
 {
     int x,y;
     int markers;
     orientation dir;
-    int knownMap[20][20];
+    int **knownMap;
 }robot;
 
 void Forward(robot *);
