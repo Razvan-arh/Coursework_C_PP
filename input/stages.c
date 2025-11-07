@@ -1,5 +1,5 @@
-//
-//
+// holds the stages creation logic
+// this was the original input location, but changed due to my desire for more flexibility
 
 #include "math.h"
 #include <stdlib.h>

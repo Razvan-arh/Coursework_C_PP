@@ -1,4 +1,4 @@
-
+//holds the input logic
 #include "math.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -15,6 +15,7 @@ void ReadGrid(robot *rob)
 {
     int robX, robY;
     int x, y;
+    
     //read robot position
     fscanf(fileptr, "[%d, %d]\n", &robX, &robY);
     rob -> x = robX;

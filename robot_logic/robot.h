@@ -1,11 +1,13 @@
-//Holds declarations of robot control functions
-//
+// holds declarations of robot control functions and robot structs
+
 #ifndef ROBOT_H
 #define ROBOT_H
 
+#include "robot_navigation.h"
+
+
 typedef enum _orientation {UP = 0, RIGHT, DOWN, LEFT}orientation;
 
-#include "robot_navigation.h"
 
 typedef struct _Robot
 {
@@ -18,10 +20,10 @@ typedef struct _Robot
 void Forward(robot *);
 void Left(robot *);
 void Right(robot *);
-int AtMarker();
-int CanMoveForward();
-void PickUpMarker();
-void DropMarker();
-int MarkerCount();
+int AtMarker(robot *);
+int CanMoveForward(robot *, int);
+void PickUpMarker(robot *);
+void DropMarker(robot *);
+int MarkerCount(robot *);
 
 #endif

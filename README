@@ -1,7 +1,46 @@
-gcc $(find input drawing_logic robot_logic -type f -name '*.c') -o main -lm
-gcc input/stages.c input/read.c drawing_logic/drawings.c drawing_logic/graphics.c robot_logic/robot_navigation.c robot_logic/robot.c -o main -lm
+# C coursework project
 
+This is Razvan Arhip`s submission for the C coursework.
+
+## Usage
+
+The program generates a map based on templates, or at random, which contains multiple markers and obstacles, and a 'robot' that 
+solves the maze. 
+
+I have included instructions for compiling and running under, for changing the map there is a input.txt in the input directory;
+it admits the following keywords: 'EMPTY' 'RANDOM' 'CUSTOM' 'STAGE1' 'STAGE2' 'STAGE3' 'STAGE4' 'STAGE5'. 
+The keywords must be in all caps and the only thing in the input file, the program comes with stage 5 already there.
+The stages, empty, and random keywords don`t require aditional input but the custom one allows the creation of personal map
+which requires aditional input, see the custom.txt file for more information on how it should be done 
+
+## Commands for compiling
+
+I have included a makefile for ease of use, just using the make command and then running the program should suffice,
+the makefile also allows make clean for reamoving the .o files:
+```
 make
 make clean
+```
+In case that does not work either of these 2 commands should work, if used from the main directory:
+```
+gcc $(find input drawing_logic robot_logic -type f -name '*.c') -o main -lm
+```
+```
+gcc input/stages.c input/read.c drawing_logic/drawings.c drawing_logic/graphics.c robot_logic/robot_navigation.c robot_logic/robot.c -o main -lm
+```
 
+## Command for running
+
+'''
 ./main | java -jar drawapp-4.5.jar
+'''
+
+## On Randomness
+
+I have decided to use a set seed for the rand() function, which is 235; this cand be disabled by deleting 
+the first line of code in the main function and replacing it with the one commented below it.
+
+## Other mentions
+
+If at any point I have made a spelling mistake in my comments or this readme please excuse me, I have mild dyslexia
+so some errors will evade me.

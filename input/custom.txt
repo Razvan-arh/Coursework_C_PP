@@ -1,0 +1,28 @@
+THIS TEXT SHOULD BE DELETED BEFORE RUNNING THE PROGRAM WITH THE CUSTOM SETTING
+
+To use this file, the CUSTOM keyword must be written on it's own in the input.txt file.
+This file follows the following template:
+
+n - an integer between 3 and 25
+[x, y] - the robot x and y coordinates
+a - number of markers
+x1 y1
+x2 y2
+...
+xa ya - the markers x and y coordinates
+(x1, y1)
+(x2, y2)
+...
+(xm, ym) - the obstacles x and y coordinates if any
+
+I have included an example bellow, delete all the text above and paste it on top for testing:
+
+10
+[5, 5]
+2
+1 4
+2 5
+(3, 3)
+(3, 2)
+(8, 9)
+(6, 8)

@@ -29,7 +29,6 @@ void DrawObstacle(int x, int y) //coordinates of the cell
     setColour(black);
 
     //calculate where to draw obstacle based on the cell position
-    //chose the magic numbers based on what looked the pretiest they don't appear anywhere else
 
     int cornerX = UPP_CORNER_X + x * cellSize + 2;
     int cornerY = UPP_CORNER_Y + y * cellSize + 2;
@@ -59,7 +58,7 @@ void DrawRobot(int x, int y, orientation dirFacing)
     int triX[3], triY[3];
     double angle;
 
-    switch(dirFacing)
+    switch(dirFacing) //finds the coordinates for the tip of the robot
     {
         case 0:
             triX[0] = UPP_CORNER_X + x * cellSize + cellSize / 2;
@@ -85,13 +84,15 @@ void DrawRobot(int x, int y, orientation dirFacing)
             break;
     }
 
-    triX[1] = triX[0] + (int)((sin(angle)) * (cellSize / 3 * 2) + (cos(angle)) * 10); //sin + cos0
-    triY[1] = triY[0] + (int)((cos(angle)) * (cellSize / 3 * 2) + (sin(angle)) * 10); //sin0 cos -
-    triX[2] = triX[0] + (int)((sin(angle)) * (cellSize / 3 * 2) - (cos(angle)) * 10); //sin - cos0
-    triY[2] = triY[0] + (int)((cos(angle)) * (cellSize / 3 * 2) - (sin(angle)) * 10); //sin 0 cos +
+    //calculates the other points of the triangle
+    triX[1] = triX[0] + (int)((sin(angle)) * (cellSize / 3 * 2) + (cos(angle)) * 10); 
+    triY[1] = triY[0] + (int)((cos(angle)) * (cellSize / 3 * 2) + (sin(angle)) * 10); 
+    triX[2] = triX[0] + (int)((sin(angle)) * (cellSize / 3 * 2) - (cos(angle)) * 10);
+    triY[2] = triY[0] + (int)((cos(angle)) * (cellSize / 3 * 2) - (sin(angle)) * 10); 
 
-    fillPolygon(3, triX, triY);
+    fillPolygon(3, triX, triY);//draws the robot
 
+    //this lines of code draw a small red base for the robot to distingush him better
     setColour(red);
     drawLine(triX[1] + (int)(cos(angle)) * 2, triY[1] + (int)(sin(angle)) * 2, triX[2] - (int)(cos(angle)) * 2, triY[2] - (int)(sin(angle)) * 2);
 }
@@ -139,18 +140,19 @@ void DrawForeground(int robotX, int robotY, orientation robotDirection)
 
 void UpdateDrawing(robot *rob, int n)
 {
-    if(isDrawingBackground == 0 && isDrawingForeground == 0)
+    if(isDrawingBackground == 0 && isDrawingForeground == 0) // initializes the drawing
     {
         DrawBackground(n);
         DrawForeground(rob -> x, rob -> y, rob -> dir);
     }
-    else if(updateMarkers)
+    else if(updateMarkers) // updates background if there's been a marker change
     {
         DrawBackground(n);
         DrawForeground(rob -> x, rob -> y, rob -> dir);
         updateMarkers = 0;
     }
-    else
+    else // updates foreground
         DrawForeground(rob -> x, rob -> y, rob -> dir);
+    
     sleep(UPDATE_SPEED);
 }

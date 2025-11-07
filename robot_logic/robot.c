@@ -1,11 +1,10 @@
-//
-//
+// defines robot control logic
 
 #include "robot_navigation.h"
 #include "robot.h"
 #include "../drawing_logic/drawings.h"
 
-//
+
 void Forward(robot *rob)
 {
     switch(rob -> dir)

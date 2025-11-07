@@ -5,14 +5,13 @@
 #define ROBOT_NAVIGATION_H
 
 #include <stdio.h>
+#include "robot.h"
 
-#define MAX_GRID_LENGTH 25
+#define MAX_GRID_LENGTH 25 //number of cells
+#define SEED 235 // testing seed
 
 
-extern FILE *inputPtr;
-extern FILE *fileptr;
-
-extern int grid[MAX_GRID_LENGTH][MAX_GRID_LENGTH];  //most important variable in the code
+extern int grid[MAX_GRID_LENGTH][MAX_GRID_LENGTH];  //holds the complete map
                                                     //free space = 0
                                                     //obstacle = 1
                                                     //marker = 2
@@ -26,11 +25,12 @@ extern int objective;   //there are 2 main objectives
                         // 1 - for puting markers in a corner
                         //if unspecified it is assumed 0
 
-extern int objX; //only used for objective 1
+//only used for objective 1
+extern int objX; 
 extern int objY;
 
 void SimpleNavigation();
-void GoBack();
+void TurnTo();
 int ReadAll();
 
 #endif
